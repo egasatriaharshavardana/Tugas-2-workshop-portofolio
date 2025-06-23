@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ega Satria Harshavardana - Future Game Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0c0c0c 100%);
+            animation: cosmicShift 20s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        @keyframes cosmicShift {
+            0%, 100% { 
+                background: 
+                    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
+                    linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0c0c0c 100%);
+            }
+            25% { 
+                background: 
+                    radial-gradient(circle at 70% 30%, rgba(255, 119, 198, 0.4) 0%, transparent 50%),
+                    radial-gradient(circle at 30% 70%, rgba(120, 219, 255, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 60% 60%, rgba(199, 120, 255, 0.2) 0%, transparent 50%),
+                    linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #1a1a2e 100%);
+            }
+            50% { 
+                background: 
+                    radial-gradient(circle at 80% 80%, rgba(120, 219, 255, 0.4) 0%, transparent 50%),
+                    radial-gradient(circle at 20% 20%, rgba(199, 120, 255, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 90%, rgba(255, 200, 120, 0.2) 0%, transparent 50%),
+                    linear-gradient(135deg, #16213e 0%, #0f3460 25%, #533483 50%, #7209b7 75%, #16213e 100%);
+            }
+            75% { 
+                background: 
+                    radial-gradient(circle at 30% 20%, rgba(199, 120, 255, 0.4) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 80%, rgba(255, 200, 120, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 10%, rgba(120, 255, 200, 0.2) 0%, transparent 50%),
+                    linear-gradient(135deg, #0f3460 0%, #533483 25%, #7209b7 50%, #1a1a2e 75%, #0f3460 100%);
+            }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+            box-shadow: 0 0 10px #00ffff;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .profile-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 100px rgba(0, 255, 255, 0.1);
+            overflow: hidden;
+            animation: cardGlow 3s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        @keyframes cardGlow {
+            0% {
+                box-shadow: 
+                    0 30px 60px rgba(0, 0, 0, 0.5),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                    0 0 100px rgba(0, 255, 255, 0.1);
+            }
+            100% {
+                box-shadow: 
+                    0 30px 60px rgba(0, 0, 0, 0.5),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                    0 0 150px rgba(255, 0, 255, 0.2);
+            }
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: scan 4s infinite;
+            z-index: 1;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header {
+            background: linear-gradient(135deg, 
+                rgba(0, 255, 255, 0.1) 0%, 
+                rgba(255, 0, 255, 0.1) 25%,
+                rgba(0, 100, 255, 0.1) 50%,
+                rgba(255, 100, 0, 0.1) 75%,
+                rgba(100, 255, 0, 0.1) 100%);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 98px,
+                    rgba(0, 255, 255, 0.03) 100px
+                );
+            animation: gridMove 10s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100px); }
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ffff) border-box;
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            box-shadow: 
+                0 0 50px rgba(0, 255, 255, 0.5),
+                inset 0 0 50px rgba(255, 0, 255, 0.2);
+            animation: profileGlow 2s ease-in-out infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes profileGlow {
+            0% {
+                box-shadow: 
+                    0 0 50px rgba(0, 255, 255, 0.5),
+                    inset 0 0 50px rgba(255, 0, 255, 0.2);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 
+                    0 0 80px rgba(255, 0, 255, 0.7),
+                    inset 0 0 50px rgba(0, 255, 255, 0.3);
+                transform: scale(1.02);
+            }
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .profile-img::before {
+            content: 'ES';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+            z-index: 1;
+        }
+
+        .name {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 2s ease-in-out infinite alternate;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+                filter: brightness(1);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+                filter: brightness(1.2);
+            }
+        }
+
+        .profession {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .age {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 50px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid transparent;
+            background-image: linear-gradient(90deg, #00ffff, #ff00ff);
+            background-position: bottom;
+            background-size: 100% 2px;
+            background-repeat: no-repeat;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #ffff00, #00ffff);
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { box-shadow: 0 0 5px #ffff00; }
+            100% { box-shadow: 0 0 15px #00ffff; }
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .skill-item {
+            padding: 25px 35px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skill-item:nth-child(1) {
+            box-shadow: 0 0 30px rgba(255, 100, 100, 0.3);
+        }
+
+        .skill-item:nth-child(2) {
+            box-shadow: 0 0 30px rgba(100, 255, 100, 0.3);
+        }
+
+        .skill-item:nth-child(3) {
+            box-shadow: 0 0 30px rgba(100, 100, 255, 0.3);
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .skill-item:hover::before {
+            left: 100%;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(0, 255, 255, 0.4);
+        }
+
+        .skill-item:nth-child(1):hover {
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(255, 100, 100, 0.6);
+        }
+
+        .skill-item:nth-child(2):hover {
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(100, 255, 100, 0.6);
+        }
+
+        .skill-item:nth-child(3):hover {
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(100, 100, 255, 0.6);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .contact-item:nth-child(1) {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .contact-item:nth-child(2) {
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+        }
+
+        .contact-item:nth-child(3) {
+            box-shadow: 0 0 30px rgba(255, 255, 0, 0.2);
+        }
+
+        .contact-item:nth-child(4) {
+            box-shadow: 0 0 30px rgba(255, 100, 0, 0.2);
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: rotate 4s linear infinite;
+            z-index: 1;
+        }
+
+        .contact-item > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .contact-item:hover {
+            transform: translateY(-12px) scale(1.03);
+        }
+
+        .contact-item:nth-child(1):hover {
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(0, 255, 255, 0.5);
+        }
+
+        .contact-item:nth-child(2):hover {
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(255, 0, 255, 0.5);
+        }
+
+        .contact-item:nth-child(3):hover {
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(255, 255, 0, 0.5);
+        }
+
+        .contact-item:nth-child(4):hover {
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(255, 100, 0, 0.5);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .contact-label {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-value {
+            opacity: 0.9;
+            word-break: break-all;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(145deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', monospace;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(0, 255, 255, 0.02) 22px
+                );
+        }
+
+        .game-controller {
+            display: inline-block;
+            animation: controllerBounce 2s infinite;
+            font-size: 1.5em;
+        }
+
+        @keyframes controllerBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(0deg); }
+            40% { transform: translateY(-12px) rotate(10deg); }
+            60% { transform: translateY(-6px) rotate(-5deg); }
+        }
+
+        /* Holographic effect */
+        .holographic {
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: hologram 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes hologram {
+            0% {
+                background-position: 0% 50%;
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                background-position: 100% 50%;
+                filter: hue-rotate(90deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2.5rem;
+            }
+            
+            .profession {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .skill-item {
+                padding: 20px 25px;
+                font-size: 1rem;
+            }
+            
+            .contact-item {
+                padding: 25px 20px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="profile-card">
+            <div class="header">
+                <div class="profile-img">
+                    <img src="https://pixabay.com/id/illustrations/robot-masa-depan-ai-teknologi-7014652/
+                    " alt="Ega Satria Harshavardana" onload="this.style.display='block'; this.previousElementSibling?.remove?.();" onerror="this.style.display='none';">
+                </div>
+                <h1 class="name holographic">Ega Satria Harshavardana</h1>
+                <p class="profession">⚡ Future Game Developer <span class="game-controller">🎮</span></p>
+                <p class="age">19 Years • Digital Pioneer</p>
+            </div>
+
+            <div class="content">
+                <div class="section">
+                    <h2 class="section-title">⚡ Tech Arsenal</h2>
+                    <div class="skills">
+                        <div class="skill-item">HTML</div>
+                        <div class="skill-item">CSS</div>
+                        <div class="skill-item">JavaScript</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">🌐 Digital Gateway</h2>
+                    <div class="contact-grid">
+                        <a href="tel:+6289663241017" class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <div class="contact-label">Contact Me</div>
+                            <div class="contact-value">089663241017</div>
+                        </a>
+                        
+                        <a href="mailto:egathekid@gmail.com" class="contact-item">
+                            <span class="contact-icon">✉️</span>
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value">egathekid@gmail.com</div>
+                        </a>
+                        
+                        <a href="https://www.linkedin.com/in/ega-satria-harshavardana-90014a371/" target="_blank" class="contact-item">
+                            <span class="contact-icon">💼</span>
+                            <div class="contact-label">Linkedln</div>
+                            <div class="contact-value">Ega Satria Harshavardana</div>
+                        </a>
+                        
+                        <a href="https://github.com/egasatriaharshavardana" target="_blank" class="contact-item">
+                            <span class="contact-icon">⚡</span>
+                            <div class="contact-label">Git hub</div>
+                            <div class="contact-value">egasatriaharshavardana</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p class="holographic">✨ "Architecting Tomorrow's Gaming Reality" ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const colors = ['#00ffff', '#ff00ff', '#ffff00', '#00ff00', '#ff0080'];
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Enhanced skill interactions
+        document.querySelectorAll('.skill-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.9) rotateY(180deg)';
+                this.style.background = 'linear-gradient(145deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2))';
+                
+                setTimeout(() => {
+                    this.style.transform = 'scale(1) rotateY(0deg)';
+                    this.style.background = 'linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))';
+                }, 300);
+            });
+
+            // Add hologram effect on hover
+            item.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1), rgba(255, 255, 0, 0.1))';
+                this.style.backgroundSize = '300% 300%';
+                this.style.animation = 'hologram 1s ease-in-out infinite alternate';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.background = 'linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))';
+                this.style.animation = 'none';
+            });
+        });
+
+        // Contact items enhanced animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0) scale(1)';
+                    }, index * 150);
+                }
+            });
+        });
+
+        document.querySelectorAll('.contact-item').
